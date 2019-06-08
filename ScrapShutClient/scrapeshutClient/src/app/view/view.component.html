@@ -1,0 +1,101 @@
+
+
+
+<!--Main Navigation-->
+<header class="intro-header">
+
+    <!--Navbar-->
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+      <mdb-navbar-brand>
+        <a class="logo navbar-brand waves-light" mdbWavesEffect href="#"><strong>ScrapShut</strong></a>
+      </mdb-navbar-brand>
+      <links>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item waves-light" mdbWavesEffect>
+            <a class="nav-link"  routerLink="">Form</a>
+          </li>
+          <li class="nav-item waves-light active" mdbWavesEffect>
+            <a class="nav-link"  routerLink="/view">View<span class="sr-only">(current)</span></a>
+          </li>
+         
+        </ul>
+       
+      </links>
+    </mdb-navbar>
+  
+    <!--Intro Section-->
+    <section class="view intro-2">
+      <div class="full-bg-img mask rgba-gradient">
+        <div class="container flex-center">
+          <div class="d-flex align-items-center content-height w-100">
+            <div class="row flex-center pt-5 mt-3 w-100">
+                <div class="form-inline md-form form-sm">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"   mdbInput [(ngModel)]="Search" >
+                </div>
+                  <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect (click)="search()">Search</button>
+  
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  </header>
+
+<div *ngFor="let res of response">
+
+  <!-- Card -->
+<mdb-card>
+    <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+      <!-- Card img -->
+      <mdb-card-img style="height:50%;width:50%;"  src="{{res.photo}}" alt=""></mdb-card-img>
+      <a>
+        <div class="mask"></div>
+      </a>
+    </div>
+    <!--Card content-->
+    <mdb-card-body>
+      <!--Title-->
+      <mdb-card-title>
+        <h4>NAME: {{ res.name | uppercase }}</h4>
+      </mdb-card-title>
+  
+      <!--Text-->
+      <mdb-card-text>
+          Email: {{res.email}} <br>
+          Phone: {{res.phone}} <br>
+          Branch: {{res.choice}} <br>
+      </mdb-card-text>
+    
+      <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>View Video</button>
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">{{res.name}}</h4>
+      </div>
+      <div class="modal-body">
+            <video width="320" height="240" controls>
+                    <source src="{{res.file}}" type="video/mp4">
+                    
+                    Your browser does not support the video tag.
+                  </video>
+         
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+    </mdb-card-body>
+  </mdb-card>
+  <!-- Card -->
+  </div>
